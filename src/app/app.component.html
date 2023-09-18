@@ -1,0 +1,78 @@
+<mat-card>
+  <!-- Header Section -->
+  <mat-card-header>
+    <!-- Input Field for Searching -->
+    <mat-form-field>
+      <input matInput (keyup)="Filter($event)" placeholder="Enter the text."/>
+    </mat-form-field>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Loading Spinner Section -->
+    <div *ngIf="!isLoading; else dataContent">
+      <!-- Display a loading spinner while data is being loaded -->
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- Actual Data Content Section -->
+    <ng-template #dataContent>
+      <table matSort mat-table [dataSource]="data" class="mat-elevation-z8">
+
+        <!-- Columns for the Table -->
+       
+        
+        <!-- API Column -->
+        <ng-container matColumnDef="API">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> API </th>
+          <td mat-cell *matCellDef="let element"> {{element.API}} </td>
+        </ng-container>
+
+        <!-- Auth Column -->
+        <ng-container matColumnDef="Auth">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Auth </th>
+          <td mat-cell *matCellDef="let element"> {{element.Auth}} </td>
+        </ng-container>
+
+        <!-- Category Column -->
+        <ng-container matColumnDef="Category">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.Category}} </td>
+        </ng-container>
+
+        <!-- Cors Column -->
+        <ng-container matColumnDef="Cors">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Cors </th>
+          <td mat-cell *matCellDef="let element"> {{element.Cors}} </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="Description">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+        </ng-container>
+
+        <!-- HTTPS Column -->
+        <ng-container matColumnDef="HTTPS">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> HTTPS </th>
+          <td mat-cell *matCellDef="let element"> {{element.HTTPS}} </td>
+        </ng-container>
+
+        <!-- Link Column -->
+        <ng-container matColumnDef="Link">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> API </th>
+          <td mat-cell *matCellDef="let element"> {{element.Link}} </td>
+        </ng-container>
+
+        <!-- Define Header and Row Templates for the Table -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </ng-template>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <!-- Paginator for navigating through pages of data -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  </mat-card-footer>
+</mat-card>
